@@ -6,6 +6,7 @@ RUN curl -sL "https://github.com/google/go-containerregistry/releases/download/v
 
 RUN tar -zxvf go-containerregistry.tar.gz -C /usr/local/bin/ crane
 
+RUN rm go-containerregistry.tar.gz
 
 #RUN \
 #  microdnf install \
