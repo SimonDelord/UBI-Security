@@ -15,6 +15,8 @@ RUN yum install go-toolset -y
 
 RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
 
+RUN mv /root/go/bin/rekor-cli /usr/local/bin/
+
 #RUN \
 #  microdnf install \
 #  net-tools bind-utils iputils curl git unzip vim wget \
