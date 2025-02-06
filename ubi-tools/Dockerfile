@@ -11,7 +11,7 @@ RUN tar -zxvf go-containerregistry.tar.gz -C /usr/local/bin/ crane
 RUN rm go-containerregistry.tar.gz
 
 ## INSTALL REKOR-CLI###
-RUN yum install go-toolset
+RUN yum install go-toolset -y
 
 RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
 
