@@ -9,8 +9,9 @@
 ##CMD tail -f /dev/null
 
 
-FROM quay.io/smileyfritz/roxctl:latest
-##FROM example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/repository/quayuser1/cve-critical:latest
+##FROM quay.io/smileyfritz/roxctl:latest
+FROM example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/repository/quayuser1/cve-critical:latest
+
 ENV HOME /root
 
 WORKDIR /root
