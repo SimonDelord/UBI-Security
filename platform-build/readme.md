@@ -37,6 +37,8 @@ Leave the other fields as they are and click create.
 
 ## Install Quay as an Operator using ODF.
 
+Create a new project (called Quay in this demo).
+
 Go to Operator Hub and select the Quay Operator 
 
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-operator-install-1.png)
