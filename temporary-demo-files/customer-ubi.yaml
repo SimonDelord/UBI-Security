@@ -1,0 +1,38 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: customer-ubi
+  namespace: ubi-demo
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: 'example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/quayuser1/customer-ubi-gold:v.9.5'
+    pushSecret:
+      name: dockerhub
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: 'example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/quayuser1/redhat-ubi:v.9.5'
+      pullSecret:
+        name: dockerhub
+  postCommit: {}
+  source:
+    type: Dockerfile
+    dockerfile: |-
+      FROM example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/quayuser1/redhat-ubi:v.9.5
+
+      RUN dnf remove vim-minimal -y
+
+      ENV HOME /root
+
+      WORKDIR /root
+
+      CMD tail -f /dev/null
+  runPolicy: Serial
