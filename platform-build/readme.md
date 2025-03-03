@@ -26,10 +26,12 @@ Go through the pannels -> select the worker nodes deployed in the previous step.
 
 ![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-add-workers-1.png)
 
+Select lean-mode (as it doesn't have enough CPUs to run Balanced).
 
 ![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-add-workers-2.png)
 
-Select lean-mode (as it doesn't have enough CPUs to run Balanced).
 Leave the other fields as they are and click create.
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/storage-system.png)
 
 
