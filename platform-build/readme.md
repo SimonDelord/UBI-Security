@@ -12,3 +12,9 @@ Requirements for ODF are quite big - https://docs.redhat.com/en/documentation/re
 As part of the ROSA deployment, go to the OCM console and add a node pool -> called odf-node-pool -> 3 x m5.2xlarge EC2 instances.
 
 ![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-node-pool.png)
+
+
+
+The next step is to install the ODF operator from the Operator Hub.
+
+Go through all the Defaults for Operator Hub -> OpenShift Data Fundation -> Install
