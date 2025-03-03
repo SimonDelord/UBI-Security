@@ -18,3 +18,18 @@ As part of the ROSA deployment, go to the OCM console and add a node pool -> cal
 The next step is to install the ODF operator from the Operator Hub.
 
 Go through all the Defaults for Operator Hub -> OpenShift Data Fundation -> Install
+
+
+Create a Storage System Instance
+Go through the pannels -> select the worker nodes deployed in the previous step.
+
+
+![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-add-workers-1.png)
+
+
+![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-add-workers-2.png)
+
+Select lean-mode (as it doesn't have enough CPUs to run Balanced).
+Leave the other fields as they are and click create.
+
+
