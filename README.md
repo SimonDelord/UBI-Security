@@ -35,6 +35,10 @@ Records stored in Rekor on the pipeline used to harden the UBI - which commit wa
  - Tekton
  - RHTPA
 
+## Configuring Quay
+
+https://docs.google.com/document/d/1BZhJQ7rYuTxEZxK8ce_buk3iB7JQg0W6i-pxlswSGe8/edit?tab=t.0#heading=h.w4l6ykx2mju for the Clair VEX image deployment
+
 ## pipeline build
 
 Steps:
