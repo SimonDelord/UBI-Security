@@ -47,3 +47,10 @@ Then select the defaults and click install
 
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-operator-install-2.png)
 
+
+Go into the Installed Operators under the Quay Project and install the Quay Registry and select the create Quay Registry with the default parameters.
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/install-quay-instance-1.png)
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/install-quay-instance-2.png)
+
