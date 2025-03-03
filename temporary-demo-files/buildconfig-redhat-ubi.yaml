@@ -1,0 +1,36 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: redhat-ubi
+  namespace: ubi-demo
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: 'example-registry-quay-quay.apps.rosa-mqc4s.nkv5.p1.openshiftapps.com/quayuser1/redhat-ubi:v.9.5'
+    pushSecret:
+      name: dockerhub
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: 'registry.access.redhat.com/ubi9/ubi:9.5-1739751568'
+  postCommit: {}
+  source:
+    type: Dockerfile
+    dockerfile: |-
+      FROM registry.access.redhat.com/ubi9/ubi:9.5-1739751568
+
+      RUN dnf update pam -y
+
+      ENV HOME /root
+
+      WORKDIR /root
+
+      CMD tail -f /dev/null
+  runPolicy: Serial
