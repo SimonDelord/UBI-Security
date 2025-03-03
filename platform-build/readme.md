@@ -21,7 +21,7 @@ Go through all the Defaults for Operator Hub -> OpenShift Data Fundation -> Inst
 
 
 Create a Storage System Instance
-Go through the pannels -> select the worker nodes deployed in the previous step.
+Go through the pannels -> select the worker nodes deployed in the previous step and select Use CephRBD as the default storage class
 
 
 ![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-add-workers-1.png)
@@ -34,4 +34,14 @@ Leave the other fields as they are and click create.
 
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/storage-system.png)
 
+
+## Install Quay as an Operator using ODF.
+
+Go to Operator Hub and select the Quay Operator 
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-operator-install-1.png)
+
+Then select the defaults and click install
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-operator-install-2.png)
 
