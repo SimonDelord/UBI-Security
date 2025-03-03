@@ -11,4 +11,4 @@ Requirements for ODF are quite big - https://docs.redhat.com/en/documentation/re
 30 CPUs / 72 Gb of RAM -> 3 nodes.
 As part of the ROSA deployment, go to the OCM console and add a node pool -> called odf-node-pool -> 3 x m5.2xlarge EC2 instances.
 
-![Browser](https://github.com/SimonDelord/UBI-Security/platform-build/blob/main/images/odf-node-pool.png)
+![Browswer](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/odf-node-pool.png)
