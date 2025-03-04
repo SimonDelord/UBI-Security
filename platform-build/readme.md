@@ -48,9 +48,58 @@ Then select the defaults and click install
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-operator-install-2.png)
 
 
-Go into the Installed Operators under the Quay Project and install the Quay Registry and select the create Quay Registry with the default parameters.
+Go into the Installed Operators under the Quay Project and install the Quay Registry and select the create Quay Registry with the default parameters (you should change the namespace to "Quay")
 
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/install-quay-instance-1.png)
 
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/install-quay-instance-2.png)
+
+### Modify Clair to use Scanner v4
+In the current Quay release of this demo (3.13.4 - March 2025) we need to "manually" enable Scanner v4 (e.g for CSAF/VEX support).
+The following steps have been created by Shane Boulden for the configuration. 
+As part of the newer releases, this step will no longer be necessary.
+
+Once Clair is deployed, update the clair component to managed: false
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-1.png)
+
+
+We can now make changes to the Clair configuration. Update the deployment to reference the image quay.io/projectquay/clair:4.8.0:
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-2.png)
+
+Check that the Clair pods have been re-deployed, and are pulling in VEX for updates:
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-3.png)
+
+Note the name of the service that has been created by the operator for Clair:
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-4.png)
+
+Collect the Clair pre-shared key, from the secret created by the Quay operator:
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-5.png)
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-6.png)
+
+
+Now, update the secret for the Quay deployment to reference the Clair scanner (this was removed when the Clair component was set to managed: false):
+ - FEATURE_SECURITY_SCANNER: true
+ - SECURITY_SCANNER_V4_ENDPOINT: http://example-registry-clair-app (name of service you copied)
+ - SECURITY_SCANNER_V4_PSK: T2pHeGtDQm1rdFloMWZNRWgwTWtlZHN0ZnJ5OFAyejI= (base64 PSK you copied)
+
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-7.png)
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-9.png)
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-8.png)
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-10.png)
+
+
+
+
+
+
 
