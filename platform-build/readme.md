@@ -98,7 +98,7 @@ Now, update the secret for the Quay deployment to reference the Clair scanner (t
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/clair-10.png)
 
 
-
+You just need to wait a bit and then you should be able to see images being scanned with the CSAF/VEX format displayed.
 
 
 
