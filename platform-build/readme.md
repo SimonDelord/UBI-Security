@@ -4,6 +4,9 @@ There are multiple components that need to be installed on OpenShift for the pla
 
  - first you need a cluster: in this demo we are using a ROSA cluster (4.17)
  - second you need an underlying storage capability for Quay: we are using ODF (as it allows a simpler deployment of Quay - but this is not resource friendly)
+ - third you need to deploy Quay
+ - fourth you need to deploy RHTAS (Red Hat Trusted Artifact Signer)
+ - fifth you need to deploy OpenShift Pipelines (e.g Tekton)
 
 ### Install ODF as the underlying storage capability
 
