@@ -49,3 +49,10 @@ Next steps:
 Parameterise the source image (and update it in the dockerfile via sed
 Document the repo
 
+
+## cosign CLI
+crane digest example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
+cosign sign example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
+
+cosign sign example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.4 --key cosign.key --rekor-url https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/
+cosign verify --key cosign.pub --rekor-url https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com  example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
