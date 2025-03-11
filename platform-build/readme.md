@@ -108,17 +108,17 @@ You just need to wait a bit and then you should be able to see images being scan
 After creating the user (Which is done as part of the first login), you can then create a K8s secret to provide credentials to upload container images onto the local Quay instance.
 Click on the top right corner -> Quayuser1, select account settings
 
-![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret1.png)
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret-1.png)
 
 
 Click on the create application token and enter the token name (ubi-demo-token in this case). 
 
-![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret2.png)
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret-2.png)
 
 Once the token has been created click on the token itself (ubi-demo-token here) and then select Kubernetes Secret and view ubi-demo-token-secret.yaml file. 
 you can then cut and paste the yaml file directly into OpenShift.
 
-![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret3.png)
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret-3.png)
 
 
 
