@@ -121,6 +121,26 @@ you can then cut and paste the yaml file directly into OpenShift.
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/quay-secret-3.png)
 
 
+## Deploy RHTAS
+TBD
 
+## deploy OpenShift pipelines
+
+This is pretty straight forward, just go to the operator hub and deploy the OpenShift Pipelines Operator using the default.
+
+Just make sure that the Tekton Chains pod is running in the openshift-pipelines namespace.
+
+### configure Tekton Chains
+
+You need to upload a key so that Tekton Chains can sign all the builds in the cluster.
+first log into ROSA
+
+oc login -u <admin> -p <password> <ocp-api-endpoint>
+
+then run the following
+
+cosign generate-key-pair k8s://openshift-pipelines/signing-secrets
+
+This generates a secret called signing-secrets in the openshift-pipelines namespace which Chains will use to sign the images.
 
 
