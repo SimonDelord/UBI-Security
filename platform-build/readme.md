@@ -157,7 +157,7 @@ Don't forget to initialize the TUF trust root
 cosign initialize --root https://tuf-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/root.json --mirror https://tuf-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/'
 ```
 
-Now to make sure that TektonChains using the local Rekor server deployed in RHTAS, you can then go and change the configuration TektonConfig CRD by adding the following two parameters:
+Now to make sure that TektonChains using the local Rekor server deployed in RHTAS, you can then go and change the configuration TektonConfig CRD by adding the following two parameters under spec.chains:
  - transparency.enabled: 'true'
  - transparency.url: 'https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/'
 
