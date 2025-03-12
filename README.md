@@ -6,6 +6,11 @@ Hermetic build systems - Hermetic meaning - contained, and everything is perform
 
 ## High level flow of the demo
 
+The high level flow of the demo is shown in the figure below
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/images/ubi-hardening-demo.png)
+
+
 Pushing a Red Hat UBI image to Quay, and using VEX to analyse the CVEs.
 
 Showing the vim-minimal package, and how it contributes over 108 CVES
