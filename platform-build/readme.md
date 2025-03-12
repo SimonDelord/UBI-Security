@@ -148,6 +148,10 @@ cosign generate-key-pair k8s://openshift-pipelines/signing-secrets
 
 This generates a secret called signing-secrets in the openshift-pipelines namespace which Chains will use to sign the images.
 
+Don't forget to initialize the TUF trust root
+
+'cosign initialize --root https://tuf-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/root.json --mirror https://tuf-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/'
+
 Now to make sure that TektonChains using the local Rekor server deployed in RHTAS, you can then go and change the configuration TektonConfig CRD by adding the following two parameters:
  - transparency.enabled: 'true'
  - transparency.url: 'https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/'
