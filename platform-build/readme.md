@@ -122,13 +122,18 @@ you can then cut and paste the yaml file directly into OpenShift.
 
 
 ## Deploy RHTAS
-TBD
 
+Select in Operator Hub the Red Hat Trusted Artifact Signer and do the default install (or maybe create a project under which to deploy it). 
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/rhtas-1.png)
+
+Then once the operator is installed (don't worry about the fulcio server crashing if you don't configure the OIDC function, it's not needed for this demo). 
 ## deploy OpenShift pipelines
 
 This is pretty straight forward, just go to the operator hub and deploy the OpenShift Pipelines Operator using the default.
 
 Just make sure that the Tekton Chains pod is running in the openshift-pipelines namespace.
+
 
 ### configure Tekton Chains
 
@@ -142,5 +147,12 @@ then run the following
 cosign generate-key-pair k8s://openshift-pipelines/signing-secrets
 
 This generates a secret called signing-secrets in the openshift-pipelines namespace which Chains will use to sign the images.
+
+Now to make sure that TektonChains using the local Rekor server deployed in RHTAS, you can then go and change the configuration TektonConfig CRD by adding the following two parameters:
+ - transparency.enabled: 'true'
+ - transparency.url: 'https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/'
+
+
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/tekton-chains-1.png)
 
 
