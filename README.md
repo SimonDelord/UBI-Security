@@ -38,7 +38,10 @@ Records stored in Rekor on the pipeline used to harden the UBI - which commit wa
 
  - Quay (using ODF as a way of setting up automatically Quay)
  - Tekton
- - RHTPA
+ - RHTAS (Red Hat Trusted Artifact Signer)
+ - OpenShift Pipelines (e.g Tekton)
+
+Details on how to build the platform and setup the various functions are described under the [platform-build folder](https://github.com/SimonDelord/UBI-Security/tree/main/platform-build) . 
 
 ## Configuring Quay
 
