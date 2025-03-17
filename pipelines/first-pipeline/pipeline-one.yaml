@@ -1,0 +1,51 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-scan-and-deploy
+spec:
+  params:
+    - name: github-repo-revision
+      type: string
+      description: Git branch
+      default: main
+    - name: github-repo-url
+      type: string
+      description: Github repo
+      default: https://github.com/shaneboulden/chains-pipeline.git
+    - name: image
+      type: string
+      description: Destination image
+    - name: context-dir
+      type: string
+  workspaces:
+    - name: source
+  tasks:
+  - name: clone-sources
+    taskRef:
+      name: git-clone
+      kind: Task
+    params:
+      - name: URL
+        value: '$(params.github-repo-url)'
+      - name: revision
+        value: '$(params.github-repo-revision)'
+      - name: deleteExisting
+        value: 'true'
+    workspaces:
+      - name: output
+        workspace: source
+
+  - name: harden-and-sign-image
+    taskRef:
+      name: harden-ubi-build
+      kind: Task
+    params:
+      - name: IMAGE
+        value: '$(params.image)'
+      - name: CONTEXT
+        value: '.'
+    workspaces:
+      - name: source
+        workspace: source
+    runAfter:
+      - clone-sources
