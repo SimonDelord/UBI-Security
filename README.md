@@ -66,7 +66,7 @@ The second pipeline is the following:
     - sign UBI in the private local Container Registry
     - check for vulnerabilities in the hardened UBI in the local container Registry 
 
-Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/platform-build)
+Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/pipelines)
 
 Steps:
 Clone the code: https://github.com/shaneboulden/chains-pipeline
