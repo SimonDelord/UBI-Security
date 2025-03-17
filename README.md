@@ -49,10 +49,25 @@ Details on how to build the platform and setup the various functions are describ
 Once the platform and its components have been setup, the main part of the demo is the actual hardening of the Red Hat UBI image.
 
 To achieve this, [Shane Boulden](https://github.com/shaneboulden) and I have defined a workflow that does the following: 
+
+This is the first pipeline
  - Copy the Red Hat UBI into a local container registry:
-    - step 1
-    - step 2
-    - step 3
+    - check signature of the Red Hat UBI
+    - provide SBOM (Software Bill of Material) for the Red Hat UBI
+    - upload UBI to private local Container Registry
+    - sign UBI in the private local Container Registry
+    - check for vulnerabilities in the UBI in the local Container Registry
+
+The second pipeline is the following:
+ - based on the vulnerabilities found in the UBI in the local container registry
+    - remove packages / patch packages with vulnerabilities
+    - deploy packages relevant to the "local UBI build"
+    - provide SBOM for the "hardened UBI" build
+    - sign UBI in the private local Container Registry
+    - check for vulnerabilities in the hardened UBI in the local container Registry 
+
+Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/platform-build)
+
 Steps:
 Clone the code: https://github.com/shaneboulden/chains-pipeline
 Create the pipeline-run: oc create -f pipeline-run-chains.yaml
