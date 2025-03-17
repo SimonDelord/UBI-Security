@@ -1,51 +1,54 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: build-scan-and-deploy
+  namespace: openshift-pipelines
 spec:
+
   params:
-    - name: github-repo-revision
-      type: string
+    - default: main
       description: Git branch
-      default: main
-    - name: github-repo-url
+      name: github-repo-revision
       type: string
+    - default: 'https://github.com/shaneboulden/chains-pipeline.git'
       description: Github repo
-      default: https://github.com/shaneboulden/chains-pipeline.git
-    - name: image
+      name: github-repo-url
       type: string
-      description: Destination image
+    - description: Destination image
+      name: image
+      type: string
     - name: context-dir
       type: string
+      
+  tasks:
+    - name: clone-sources
+      params:
+        - name: URL
+          value: $(params.github-repo-url)
+        - name: revision
+          value: $(params.github-repo-revision)
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: source
+          
+    - name: harden-and-sign-image
+      params:
+        - name: IMAGE
+          value: $(params.image)
+        - name: CONTEXT
+          value: .
+      runAfter:
+        - clone-sources
+      taskRef:
+        kind: Task
+        name: harden-ubi-build
+      workspaces:
+        - name: source
+          workspace: source
   workspaces:
     - name: source
-  tasks:
-  - name: clone-sources
-    taskRef:
-      name: git-clone
-      kind: Task
-    params:
-      - name: URL
-        value: '$(params.github-repo-url)'
-      - name: revision
-        value: '$(params.github-repo-revision)'
-      - name: deleteExisting
-        value: 'true'
-    workspaces:
-      - name: output
-        workspace: source
-
-  - name: harden-and-sign-image
-    taskRef:
-      name: harden-ubi-build
-      kind: Task
-    params:
-      - name: IMAGE
-        value: '$(params.image)'
-      - name: CONTEXT
-        value: '.'
-    workspaces:
-      - name: source
-        workspace: source
-    runAfter:
-      - clone-sources
