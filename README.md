@@ -43,12 +43,16 @@ Records stored in Rekor on the pipeline used to harden the UBI - which commit wa
 
 Details on how to build the platform and setup the various functions are described under the [platform-build folder](https://github.com/SimonDelord/UBI-Security/tree/main/platform-build) . 
 
-## Configuring Quay
 
-https://docs.google.com/document/d/1BZhJQ7rYuTxEZxK8ce_buk3iB7JQg0W6i-pxlswSGe8/edit?tab=t.0#heading=h.w4l6ykx2mju for the Clair VEX image deployment
+## Pipeline build
 
-## pipeline build
+Once the platform and its components have been setup, the main part of the demo is the actual hardening of the Red Hat UBI image.
 
+To achieve this, [Shane Boulden](https://github.com/shaneboulden) and I have defined a workflow that does the following: 
+ - Copy the Red Hat UBI into a local container registry:
+    - step 1
+    - step 2
+    - step 3
 Steps:
 Clone the code: https://github.com/shaneboulden/chains-pipeline
 Create the pipeline-run: oc create -f pipeline-run-chains.yaml
@@ -58,9 +62,3 @@ Parameterise the source image (and update it in the dockerfile via sed
 Document the repo
 
 
-## cosign CLI
-crane digest example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
-cosign sign example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
-
-cosign sign example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.4 --key cosign.key --rekor-url https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/
-cosign verify --key cosign.pub --rekor-url https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com  example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5
