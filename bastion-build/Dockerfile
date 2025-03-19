@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest
 
 RUN \
-  microdnf install curl git unzip wget \
+  dnf install curl git unzip wget \
   && microdnf clean all
 
 ## Install Go
