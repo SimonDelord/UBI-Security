@@ -8,23 +8,23 @@ RUN \
 
 RUN wget https://go.dev/dl/go1.24.1.linux-amd64.tar.gz
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.1.linux-amd64.tar.gz
-RUN export PATH=$PATH:/usr/local/go/bin
-RUN go version
+## RUN export PATH=$PATH:/usr/local/go/bin
+## RUN go version
 
 ## Install cosign
 
 RUN go install github.com/sigstore/cosign/v2/cmd/cosign@latest
-RUN cosign version
+## RUN cosign version
 
 ## Install Crane
 
 RUN go install github.com/google/go-containerregistry/cmd/crane@latest
-RUN crane version
+## RUN crane version
 
 ## Install Rekor-cli
 
 RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
-RUN rekor-cli version
+## RUN rekor-cli version
 
 ## Install syft
 
