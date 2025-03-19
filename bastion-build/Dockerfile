@@ -15,17 +15,17 @@ RUN go version
 ## Install cosign
 
 RUN go install github.com/sigstore/cosign/v2/cmd/cosign@latest
-RUN cosign version
+##RUN cosign version
 
 ## Install Crane
 
 RUN go install github.com/google/go-containerregistry/cmd/crane@latest
-RUN crane version
+##RUN crane version
 
 ## Install Rekor-cli
 
 RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
-RUN rekor-cli version
+##RUN rekor-cli version
 
 ## Install syft
 
