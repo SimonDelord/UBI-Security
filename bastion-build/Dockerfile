@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest
 
 RUN \
-  dnf install git unzip wget \
+  dnf install git unzip wget -y \
   && dnf clean all
 
 ## Install Go
