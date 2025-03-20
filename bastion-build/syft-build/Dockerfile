@@ -3,4 +3,11 @@ ENV HOME /root
 
 WORKDIR /root
 
-CMD ls
+
+RUN ["/bin/bash", "-c", "echo I am using bash"]
+##CMD ls
+ ##- "/bin/bash"
+  ##        - "-c"
+   ##       - "--"
+    ##    args: 
+     ##     - "while true; do sleep 30; done;"
