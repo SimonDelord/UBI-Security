@@ -4,7 +4,7 @@ ENV HOME /root
 
 WORKDIR /root
 
-CMD ["syft", "version"]
+CMD ["syft", "-v"]
 
 
 ##RUN syft version
