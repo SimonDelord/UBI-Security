@@ -4,7 +4,7 @@ ENV HOME /root
 WORKDIR /root
 
 
-RUN ["/bin/bash", "-c", "echo I am using bash"]
+RUN ["/bin/sh", "-c", "echo I am using bash"]
 ##CMD ls
  ##- "/bin/bash"
   ##        - "-c"
