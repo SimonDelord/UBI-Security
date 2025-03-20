@@ -4,6 +4,9 @@ ENV HOME /root
 
 WORKDIR /root
 
+CMD ["/usr/sbin/", "-c", "--args: while true; do sleep 30; done;"]
+
+
 ##RUN syft version
 ##RUN ["/bin/sh", "-c", "echo I am using bash"]
 ##CMD ls
