@@ -4,7 +4,7 @@ ENV HOME /root
 
 WORKDIR /root
 
-CMD ["/usr/sbin/", "-c", "--args: while true; do sleep 30; done;"]
+CMD ["syft", "version"]
 
 
 ##RUN syft version
