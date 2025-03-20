@@ -3,8 +3,8 @@ ENV HOME /root
 
 WORKDIR /root
 
-
-RUN ["/bin/sh", "-c", "echo I am using bash"]
+RUN syft version
+##RUN ["/bin/sh", "-c", "echo I am using bash"]
 ##CMD ls
  ##- "/bin/bash"
   ##        - "-c"
