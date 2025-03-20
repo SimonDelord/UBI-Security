@@ -29,8 +29,16 @@ RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
 
 ## Install syft
 
-RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh
-RUN sh -s -- -b /usr/local/bin
+##echo "echo 'hello world' | grep ell" >> /entrypoint.sh &&\
+##RUN \
+ ##   echo "#!/bin/ash" > /entrypoint.sh &&\
+  ##  echo "echo 'hello world' | grep ell" >> /entrypoint.sh &&\
+   ## chmod 755 /entrypoint.sh
+
+
+
+RUN \
+    curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 
 
 ENV HOME /root
