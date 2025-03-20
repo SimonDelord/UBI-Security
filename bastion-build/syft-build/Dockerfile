@@ -3,4 +3,4 @@ ENV HOME /root
 
 WORKDIR /root
 
-CMD tail -f /dev/null
+CMD ls
