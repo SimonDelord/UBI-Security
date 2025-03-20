@@ -4,7 +4,9 @@ ENV HOME /root
 
 WORKDIR /root
 
-CMD ["syft", "-v"]
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+
 
 
 ##RUN syft version
