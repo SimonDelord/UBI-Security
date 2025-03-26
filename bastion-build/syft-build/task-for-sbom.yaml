@@ -1,0 +1,21 @@
+### this is a very ugly way of getting syft to generate an SBOM and then upload the output of it to the Quay repo
+### basically I am creating a file from the syft command and then using this file and the cosign upload cli to push this to the proper Quay repo...
+
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-a-sbom
+spec:
+  steps:
+    - name: use-syft-for-sbom
+      image: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image
+      script: |
+        syft docker.io/alpine:3.13 >> simon.spdx.sbom; ./go/bin/cosign upload blob -f simon.spdx.sbom example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image:10.0.sbom --allow-insecure-registry=true --registry-username=quayuser1 --registry-password=1800redhat
+
+##    - name: upload-to-quay
+##      image: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image
+##      script: |
+##        ./go/bin/cosign upload blob -f /root/new-sbom.spdx.sbom example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image:3.4.sbom --allow-insecure-registry=true --registry-username=quayuser1 --registry-password=1800redhat
+#
+#syft docker.io/alpine:3.13 >> papa.spdx.sbom; ./go/bin/cosign upload blob -f papa.spdx.sbom
+[root@ip-192-168-0-202 tekton]#
