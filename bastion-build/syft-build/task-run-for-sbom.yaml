@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1
+kind: TaskRun
+metadata:
+  generateName: cli-run-
+  namespace: openshift-pipelines
+  labels:
+    app.kubernetes.io/managed-by: tekton-pipelines
+    app.kubernetes.io/version: '0.1'
+    tekton.dev/task: syft
+spec:
+##  params:
+##    - name: ARGS
+##      value:
+##        - 'example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.8 --output=spdx-json=os-security-sbom.spdx.json'
+##    - name: SYFT_IMAGE
+##      value: 'docker.io/anchore/syft@sha256:dd40bc09ff2bf3b860c399e7cf5c2db088e84c85937ac05fdeca3cd88fe2a728'
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: create-a-sbom
+  timeout: 1h0m0s
