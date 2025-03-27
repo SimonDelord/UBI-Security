@@ -33,6 +33,24 @@ For uploading the UBI to private local Container Registry it uses the following 
 For checking the signature it uses cosign (native Tekton)
 for providing the SBOM it could use syft however I slightly modified it (see syft folder) to combo syft and cosign together.
 
+#### pipeline steps
+
+```
+crane digest example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6
+sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c
+
+cosign verify --key cosign.pub example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6@sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c --insecure-ignore-tlog=true
+WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
+
+Verification for example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo@sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+
+[{"critical":{"identity":{"docker-reference":"example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo"},"image":{"docker-manifest-digest":"sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c"},"type":"cosign container image signature"},"optional":{"Bundle":{"SignedEntryTimestamp":"MGQCMBtDAoVdRftPBWXPwbSRvKpFpe6WDjWBloNwVHbGKKYxr+idRD+Gj7hHtgIdliCI/gIwW3hy3P+aQebP7UHCDOW7PO/n8G50Rhuwj0ZbECj6UTNTD+N8PwqX2dosF1De986E","Payload":{"body":"eyJhcGlWZXJzaW9uIjoiMC4wLjEiLCJraW5kIjoiaGFzaGVkcmVrb3JkIiwic3BlYyI6eyJkYXRhIjp7Imhhc2giOnsiYWxnb3JpdGhtIjoic2hhMjU2IiwidmFsdWUiOiJhYzkyNjY3ZTJkOGUxZjc5MWZhYzBiZTRjZTc3NWE2YTNhY2I5NmE5ZjE1OThiMDdlMDFkZWJhYzA1YWMyZGM2In19LCJzaWduYXR1cmUiOnsiY29udGVudCI6Ik1FVUNJQk9QT2dmU2JpM1ZSSXVhcDh5MjYyQm9yMTE5UlY5QUc3SUpnM0NOaWl0bUFpRUFtWDlGdkhtRlc3L2xFblB2Z050WFpuYjBIRUplV2JDZXpzS2V3dmIzcnVzPSIsInB1YmxpY0tleSI6eyJjb250ZW50IjoiTFMwdExTMUNSVWRKVGlCUVZVSk1TVU1nUzBWWkxTMHRMUzBLVFVacmQwVjNXVWhMYjFwSmVtb3dRMEZSV1VsTGIxcEplbW93UkVGUlkwUlJaMEZGUlRscmEwaDRVR1p5UkhGc1kwZzRZU3N5VEU4NFNrZHZVMnA2UmdwMVRFeHJkM1pKWTAxcUwybFJWRXBpYm1OMFpVeGpaMnhKV1dZdmRVeG5Oa2hFZFZoRVpUQnBNVUZqY2tKUVpUTTRZV2REWlV0eU1qSm5QVDBLTFMwdExTMUZUa1FnVUZWQ1RFbERJRXRGV1MwdExTMHRDZz09In19fX0=","integratedTime":1741654026,"logIndex":10,"logID":"6c5582ec9e796b510f463af7accef9d1a254aeffb384d16099ccc1819db85375"}}}}]
+```
+
+
 
 Check the digest of the latest UBI:
 ```
