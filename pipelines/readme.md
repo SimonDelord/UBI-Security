@@ -18,11 +18,11 @@ There are multiple benefits to using Tekton as part of the build:
 ### First pipeline
 
 This is the first pipeline that copies the Red Hat UBI into a local container registry:
-    - check signature of the Red Hat UBI - cosign function
-    - provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions
-    - build and upload UBI to private local Container Registry - git and buildah functions
-    - sign UBI in the private local Container Registry - cosign function
-    - check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
+ - check signature of the Red Hat UBI - cosign function
+ - provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions
+ - build and upload UBI to private local Container Registry - git and buildah functions
+ - sign UBI in the private local Container Registry - cosign function
+ - check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
     
 
 For uploading the UBI to private local Container Registry it uses the following Tasks:
