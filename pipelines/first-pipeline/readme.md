@@ -1,5 +1,16 @@
 This is the folder for the first pipeline.
 
+The various tasks are read sequentially.
+
+### First Task
+
+Defined in first-task.yaml and associated TaskRun in first-task-run.yaml.
+
+This task takes a "container image" called sourceImage and does an SBOM analysis and uploads this SBOM to a specific Repo.
+
+### Second task
+
+
 There are multiple files for this pipeline to run:
  - pipeline-one.yaml: is effectively the main definition of the pipeline. It contains all the tasks that are being run as part of it.
  - harden-ubi-build-task.yaml: is the slightly modified buildah task (native tekton) for the creation of the ubi image and upload onto the local Quay registry.
