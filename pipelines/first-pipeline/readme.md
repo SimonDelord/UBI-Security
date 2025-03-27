@@ -21,6 +21,8 @@ Defined in first-task.yaml and associated TaskRun in first-task-run.yaml.
 
 This task takes a "container image" called sourceImage and does an SBOM analysis and uploads this SBOM to a specific Repo.
 
+Please note the first task uses the "magic image" that has been build (e.g rekor-cli, crane, cosign, syft) in the folder (bastion-build)[https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build]
+
 ### Second task
 
 
