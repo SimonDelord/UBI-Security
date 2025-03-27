@@ -1,6 +1,19 @@
 This is the folder for the first pipeline.
 
+This is the first pipeline that copies the Red Hat UBI into a local container registry:
+
+- Task zero: check signature of the Red Hat UBI - cosign function
+- Task one: provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions
+- Task two: build and upload UBI to private local Container Registry - git and buildah functions
+- Task three: sign UBI in the private local Container Registry - cosign function
+- Task four (optional with Quay): check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
+
 The various tasks are read sequentially.
+
+### Task zero
+Defined in zero-task.yaml and associated TaskRun in zero-task-run.yaml
+
+
 
 ### First Task
 
