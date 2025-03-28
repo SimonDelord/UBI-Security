@@ -13,6 +13,21 @@ The various tasks are read sequentially.
 ### Task zero
 Defined in zero-task.yaml and associated TaskRun in zero-task-run.yaml
 
+There are a couple of things that need to be done first.
+
+To check that the specific image you are checking is signed, you need to have a public-key (e.g of the instance that signed it) available.
+
+You can then create a secret
+```
+oc create secret generic cosign-public-key --from-file=cosign.pub
+```
+
+you can then run the following command (e.g as part of the tekton Task)
+
+```
+cosign verify --key k8s://openshift-pipelines/cosign-public-key example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6@sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c --insecure-ignore-tlog=true
+```
+
 
 
 ### First Task
