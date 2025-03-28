@@ -1,0 +1,30 @@
+kind: Task
+metadata:
+  name: check-base-image-is-signed
+spec:
+  params:
+    - name: sourceImage
+      description: the container registry for the container image for which the sbom is generated
+      type: string
+    - name: publicKey
+      description: name of the secret holding the public key used by cosign cli
+      type: string
+      default: cosign-public-key
+  steps:
+    - name: check-signature-using-cosign
+      image: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image
+      env:
+        - name: PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: $(params.publicKey)
+              key: cosign.pub
+      script: |
+        sha=$(./go/bin/crane digest $(params.sourceImage))
+        echo $sha
+
+        finalimage=$(params.sourceImage)@$sha
+        echo $finalimage
+
+        echo $PUBLIC_KEY
+        ./go/bin/cosign verify --key k8s://openshift-pipelines/cosign-public-key $finalimage --insecure-ignore-tlog=true
