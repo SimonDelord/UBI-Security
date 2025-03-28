@@ -76,4 +76,11 @@ Next steps:
 Parameterise the source image (and update it in the dockerfile via sed
 Document the repo
 
+## Structure of the Quay Repo
 
+There are 3 repos used in Quay as part of the demo:
+ - ubi-base repo: this is simulating the Red Hat repo where the base ubi exists.
+ - ubi-base-customer repo: this is where the customer is uploading all of the base images (e.g it's a mirror copy of the ubi-base repo)
+ - ubi-hardened repo: this is where the customer is uploading all of the hardened based images
+
+I need to create an image showing how images flow from ubi-base to ubi-base-customer to ubi-hardened
