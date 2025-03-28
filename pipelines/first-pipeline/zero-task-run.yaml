@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1
+kind: TaskRun
+metadata:
+  generateName: check-base-image-is-signed-
+  namespace: openshift-pipelines
+  labels:
+    app.kubernetes.io/managed-by: tekton-pipelines
+    app.kubernetes.io/version: '0.1'
+    tekton.dev/task: cosign
+spec:
+  params:
+    - name: sourceImage
+      value: "example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.5"
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: check-base-image-is-signed
+  timeout: 1h0m0s
