@@ -27,6 +27,17 @@ you can then run the following command (e.g as part of the tekton Task)
 ```
 cosign verify --key k8s://openshift-pipelines/cosign-public-key example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6@sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c --insecure-ignore-tlog=true
 ```
+The task runs a script that basically:
+ - retrieves the hash of the image using crane
+ - appends the hash to the image so cosign can verify against the hash (instead of just the version number).
+  
+```
+sha=$(./go/bin/crane digest $(params.sourceImage))
+        echo $sha
+
+        finalimage=$(params.sourceImage)@$sha
+        echo $finalimage
+```
 
 
 
