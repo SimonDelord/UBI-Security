@@ -6,8 +6,8 @@ This is the first pipeline that copies the Red Hat UBI into a local container re
 - Task one: provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions (using the "magic image")
 - Task two: clone-source (e.g copy the source Git Repo with the ContainerFile for the build of the base UBI). - tekton git-clone Task (pre-existing).
 - Task three: build and upload UBI to private local Container Registry - buildah functions (using buildah bud and push functions).
-- Task three: sign UBI in the private local Container Registry - cosign function (using the "magic image")
-- Task four (optional with Quay): check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
+- Task four: sign UBI in the private local Container Registry - cosign function (using the "magic image")
+- Task five (optional with Quay): check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
 
 The various tasks are read sequentially.
 
