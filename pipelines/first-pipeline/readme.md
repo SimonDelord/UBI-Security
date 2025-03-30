@@ -4,7 +4,8 @@ This is the first pipeline that copies the Red Hat UBI into a local container re
 
 - Task zero: check signature of the Red Hat UBI - cosign function (using the "magic image")
 - Task one: provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions (using the "magic image")
-- Task two: build and upload UBI to private local Container Registry - git and buildah functions
+- Task two: clone-source (e.g copy the source Git Repo with the ContainerFile for the build of the base UBI). - tekton git-clone Task (pre-existing).
+- Task three: build and upload UBI to private local Container Registry - buildah functions (using buildah bud and push functions).
 - Task three: sign UBI in the private local Container Registry - cosign function (using the "magic image")
 - Task four (optional with Quay): check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
 
@@ -49,7 +50,16 @@ This task takes a "container image" called sourceImage and does an SBOM analysis
 
 Please note the first task uses the "magic image" that has been build (e.g rekor-cli, crane, cosign, syft) in the folder [bastion-build](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build)
 
-### Second task
+### Second Task
+
+This is a native task using the git-clone tekton Task (e.g existing task). 
+An example of the TaskRun is presented in the second-task-run.yaml.
+
+### Third Task
+
+The third task is effectively two steps (done in a single task) using the Tekton buildah pre-defined task.
+This task is available under the third-task.yaml (there is no third-task-run.yaml because it requires the output of second-task).
+The name of this task is harden-ubi-build. 
 
 
 There are multiple files for this pipeline to run:
