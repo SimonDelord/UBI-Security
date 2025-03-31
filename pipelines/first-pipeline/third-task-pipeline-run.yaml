@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: git-clone-simon-
+spec:
+  params:
+    - name: "github-repo-revision"
+      value: "main"
+    - name: "github-repo-url"
+      value: "https://github.com/shaneboulden/chains-pipeline.git"
+    - name: "context-dir"
+      value: "/"
+
+  pipelineRef:
+    name: git-clone-simon
+  podTemplate:
+      securityContext:
+        runAsUser: 0
+        fsGroup: 0
+      volumes:
+        - name: varlibcontainers
+          persistentVolumeClaim:
+            claimName: containers-pvc-2
+  serviceAccountName: pipeline
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: pipeline-pvc-2
