@@ -55,6 +55,9 @@ Please note the first task uses the "magic image" that has been build (e.g rekor
 This is a native task using the git-clone tekton Task (e.g existing task). 
 An example of the TaskRun is presented in the second-task-run.yaml.
 
+OK there is something not working properly here. So instead, I have simply created a "one step  pipeline" and an associated pipeline-run. 
+These two artefacts will be used as part of the overall pipeline.
+
 ### Third Task
 
 The third task is effectively two steps (done in a single task) using the Tekton buildah pre-defined task.
