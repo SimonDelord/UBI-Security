@@ -1,0 +1,53 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: first-pipeline-demo-
+  annotations:
+    chains.tekton.dev/signed: 'true'
+    chains.tekton.dev/transparency: 'https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com//api/v1/log/entries?logIndex=36'
+    results.tekton.dev/stored: 'true'
+  generation: 1
+  namespace: openshift-pipelines
+  labels:
+    tekton.dev/pipeline: first-pipeline-demo
+spec:
+  params:
+
+### Task zero
+    - name: sourceImage
+      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base:v.9.6
+
+### Task one
+    - name: sbomDestination
+      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base-customer:v.9.6.sbom
+
+### Task two
+    - name: github-repo-revision
+      value: main
+    - name: github-repo-url
+      value: 'https://github.com/SimonDelord/chains-pipeline.git'
+    - name: context-dir
+      value: /
+
+### Task three
+    - name: destinationImage
+      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base-customer:v.9.6
+
+  pipelineRef:
+    name: first-pipeline-demo
+  taskRunTemplate:
+    podTemplate:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+      volumes:
+        - name: varlibcontainers
+          persistentVolumeClaim:
+            claimName: containers-pvc-2
+    serviceAccountName: pipeline
+  timeouts:
+    pipeline: 1h0m0s
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: pipeline-pvc-2
