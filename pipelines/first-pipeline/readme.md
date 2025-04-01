@@ -6,7 +6,7 @@ This is the first pipeline that copies the Red Hat UBI into a local container re
 - Task one: provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions (using the "magic image")
 - Task two: clone-source (e.g copy the source Git Repo with the ContainerFile for the build of the base UBI). - tekton git-clone Task (pre-existing).
 - Task three: build and upload UBI to private local Container Registry - buildah functions (using buildah bud and push functions).
-- Task four: sign UBI in the private local Container Registry - cosign function (using the "magic image")
+- Task four (otional if using Tekton Chains): sign UBI in the private local Container Registry - cosign function (using the "magic image")
 - Task five (optional with Quay): check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
 
 The various tasks are read sequentially.
@@ -70,11 +70,14 @@ So it is available as a two steps pipeline and an associated pipeline run:
  - third-task-pipeline.yaml
  - third-task-pipeline-run.yaml
 
-### Fourth Task
+### Fourth and Fifth tasks
+
+Because I'm using Tekton / Tekton chains and Quay, I don't need to do steps 4 and 5 since those two steps are natively handled by both TektonChains and Quay.
 
 
-There are multiple files for this pipeline to run:
- - pipeline-one.yaml: is effectively the main definition of the pipeline. It contains all the tasks that are being run as part of it.
- - harden-ubi-build-task.yaml: is the slightly modified buildah task (native tekton) for the creation of the ubi image and upload onto the local Quay registry.
- - pipeline-one-run.yaml: the various parameters that will be used by the various tasks defined in the pipeline-one.yaml pipeline.
- - the two pvc.yaml files: those are PVCs that are required for data being handled between the different tasks of the pipeline.
+## Overal Pipeline
+
+The overall Pipeline and PipelineRun files are available as:
+ - first-pipeline-final.yaml
+ - first-pipeline-run-final.yaml
+
