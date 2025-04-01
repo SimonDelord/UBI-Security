@@ -63,8 +63,14 @@ They make use of the pipeline-pvc-2 and container-pvc-2 PVCs to store their outp
 ### Third Task
 
 The third task is effectively two steps (done in a single task) using the Tekton buildah pre-defined task.
+
 This task is available under the third-task.yaml (there is no third-task-run.yaml because it requires the output of second-task).
-The name of this task is harden-ubi-build. 
+
+So it is available as a two steps pipeline and an associated pipeline run:
+ - third-task-pipeline.yaml
+ - third-task-pipeline-run.yaml
+
+### Fourth Task
 
 
 There are multiple files for this pipeline to run:
