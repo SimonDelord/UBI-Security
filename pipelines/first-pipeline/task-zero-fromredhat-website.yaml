@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: check-redhat-ubi-is-signed
+spec:
+  params:
+    - name: sourceImage
+      description: the container registry for the container image for which the sbom is generated
+      type: string
+      default: registry.redhat.io/ubi9/ubi:9.5-1739751568
+    - name: publicKey
+      description: name of the secret holding the public key used by cosign cli
+      type: string
+      default: redhat-public-key
+  steps:
+    - name: check-signature-using-cosign
+      image: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image
+      script: |
+        PWD="$(echo 'XXXXXXXXX')"
+        ./go/bin/cosign login registry.redhat.io --username YYYYYYY --password $PWD
+        sha=$(./go/bin/crane digest $(params.sourceImage))
+        echo $sha
+        finalimage=$(params.sourceImage)@$sha
+        echo $finalimage
+
+        curl https://security.access.redhat.com/data/63405576.txt >> redhat.pub; ./go/bin/cosign verify --key redhat.pub $finalimage --insecure-ignore-tlog=true
