@@ -76,7 +76,7 @@ spec:
         - name: deleteExisting
           value: 'true'
       runAfter:
-        - generate-sbom-and-upload-to-repo
+        - check-redhat-ubi-is-signed
       taskRef:
         kind: Task
         name: git-clone
