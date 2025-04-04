@@ -4,8 +4,6 @@ metadata:
   generateName: first-pipeline-demo-
   annotations:
     chains.tekton.dev/signed: 'true'
-    chains.tekton.dev/transparency: 'https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com//api/v1/log/entries?logIndex=36'
-    results.tekton.dev/stored: 'true'
   generation: 1
   namespace: openshift-pipelines
   labels:
@@ -14,12 +12,12 @@ spec:
   params:
 
 ### Task zero
-    - name: sourceImage
-      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base:v.9.6
+##    - name: sourceImage
+##      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base:v.9.6
 
 ### Task one
-    - name: sbomDestination
-      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base-customer:v.9.6.sbom
+##    - name: sbomDestination
+##      value: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-base-customer:v.9.6.sbom
 
 ### Task two
     - name: github-repo-revision
