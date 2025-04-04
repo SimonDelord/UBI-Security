@@ -22,10 +22,7 @@ spec:
       default: cosign-public-key
 
 ### parameters for Task one (this task also reuses the sourceImage parameter from Task Zero)
-    - name: sbomDestination
-      description: destination of where to upload the SBOM (Typically in the same location as the container image)
-      type: string
-
+### no longer needed
 ### parameters for Task two
     - name: github-repo-revision
       default: main
