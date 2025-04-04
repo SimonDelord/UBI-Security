@@ -42,6 +42,12 @@ sha=$(./go/bin/crane digest $(params.sourceImage))
 
 Please note the first task uses the "magic image" that has been build (e.g rekor-cli, crane, cosign, syft) in the folder [bastion-build](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build)
 
+#### Updated Task zero
+
+In the case where you want to check directly from the Red Hat website (registry.redhat.io/ubi9/ubi:latest), you can run a different task that uses cosign directly.
+This updated task is called task-zero-fromredhat-website.yaml and the associated taskrun is task-zero-fromredhat-website-run.yaml.
+
+
 ### First Task
 
 Defined in first-task.yaml and associated TaskRun in first-task-run.yaml.
