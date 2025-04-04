@@ -45,6 +45,21 @@ spec:
       type: string
       default: cosign-public-key
 
+### parameters for Task Four
+     - name: imageToSign 
+       description: name of the image to sign and location
+       type: string
+       default: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/ubi-hardened-demo:v.9.6
+     
+     - name: rekor-url
+       description: url for the rekor server
+       type: string
+       default: https://rekor-server-trusted-artifact-signer.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/
+    
+     - name: otherPublicKey
+       description: name of the k8s secret holding the key pair for cosign to use
+       type: string
+       default: signing-secrets
 
 ### This is now the lists of Tasks for the Pipeline
 
@@ -98,6 +113,24 @@ spec:
         name: generate-sbom-and-upload-to-repo
       runAfter:
         - build-and-push-image
+
+### Task four - Sign the image using the magic image and the cosign cli
+
+    - name: cosign-sign-image
+      params:
+        - name: sourceImage 
+          value: $(params.imageToSign)
+        - name: rekor-url
+          value: $(params.rekor-url)
+        - name: publicKey
+          value: $(params.otherPublicKey)
+      taskRef:
+        kind: Task
+        name: cosign-sign-image
+      runAfter:
+        - generate-sbom-and-upload-to-repo
+        
+
 
   workspaces:
     - name: source
