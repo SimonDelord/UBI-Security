@@ -1,4 +1,4 @@
-apiVersion: tekton.dev/v1
+apiVersion: tekton/v1
 kind: Pipeline
 metadata:
   annotations:
