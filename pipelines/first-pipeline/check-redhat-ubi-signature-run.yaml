@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1
+kind: TaskRun
+metadata:
+  generateName: check-redhat-ubi-is-signed-
+  namespace: openshift-pipelines
+  labels:
+    app.kubernetes.io/managed-by: tekton-pipelines
+    app.kubernetes.io/version: '0.1'
+    tekton.dev/task: cosign
+spec:
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: check-redhat-ubi-is-signed
+  timeout: 1h0m0s
