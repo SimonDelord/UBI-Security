@@ -13,6 +13,7 @@ spec:
     - name: sourceImage
       description: The container image that we are checking for a signature
       type: string
+      default: registry.redhat.io/ubi9/ubi:9.5-1739751568
 
     - name: publicKey
       description: name of the secret holding the public key used by cosign cli
@@ -31,12 +32,13 @@ spec:
       type: string
 
     - name: github-repo-url
-      default: 'https://github.com/shaneboulden/chains-pipeline.git'
+      default: 'https://github.com/SimonDelord/chains-pipeline.git'
       description: Github repo
       type: string
 
     - name: context-dir
       type: string
+      default: '/'
 
 ### parameters for Task three
 
@@ -49,7 +51,7 @@ spec:
 
   tasks:
 ### Task Zero - Check that the Red Hat UBI sitting in the local Container Rego is signed
-    - name: check-base-image-is-signed
+    - name: check-redhat-ubi-is-signed
       params:
         - name: sourceImage
           value: $(params.sourceImage)
@@ -57,22 +59,11 @@ spec:
           value: $(params.publicKey)
       taskRef:
         kind: Task
-        name: check-base-image-is-signed
+        name: check-redhat-ubi-is-signed
 
 ### Task One - Provide the SBOM and Uploads it to the local Container Image Repo
 
-    - name: generate-sbom-and-upload-to-repo
-      params:
-        - name: sourceImage
-          value: $(params.sourceImage)
-        - name: destination
-          value: $(params.sbomDestination)
-      taskRef:
-        kind: Task
-        name: generate-sbom-and-upload-to-repo
-      runAfter:
-        - check-base-image-is-signed
-
+## No longer needed.
 
 ### Task Two - clone the Git Source Repo so the UBI image can be built
     - name: clone-sources
