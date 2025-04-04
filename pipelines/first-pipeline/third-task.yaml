@@ -47,13 +47,13 @@ spec:
       description: Extra parameters passed for the push command when pushing images.
       name: PUSH_EXTRA_ARGS
       type: string
-  results:
-    - description: Digest of the image just built.
-      name: IMAGE_DIGEST
-      type: string
-    - description: Name of the image just built.
-      name: IMAGE_URL
-      type: string
+##  results:
+##    - description: Digest of the image just built.
+##      name: IMAGE_DIGEST
+##      type: string
+##    - description: Name of the image just built.
+##      name: IMAGE_URL
+##      type: string
   steps:
     - computeResources: {}
       image: $(params.BUILDER_IMAGE)
@@ -83,13 +83,13 @@ spec:
         - mountPath: /var/lib/containers
           name: varlibcontainers
       workingDir: $(workspaces.source.path)
-    - computeResources: {}
-      image: $(params.BUILDER_IMAGE)
-      name: digest-to-results
-      script: cat $(workspaces.source.path)/image-digest | tee /tekton/results/IMAGE_DIGEST
-    - computeResources: {}
-      image: $(params.BUILDER_IMAGE)
-      name: name-to-results
-      script: echo $(params.IMAGE) | tee /tekton/results/IMAGE_URL
+##    - computeResources: {}
+##      image: $(params.BUILDER_IMAGE)
+##      name: digest-to-results
+##      script: cat $(workspaces.source.path)/image-digest | tee /tekton/results/IMAGE_DIGEST
+##    - computeResources: {}
+##      image: $(params.BUILDER_IMAGE)
+##      name: name-to-results
+##      script: echo $(params.IMAGE) | tee /tekton/results/IMAGE_URL
   workspaces:
     - name: source
