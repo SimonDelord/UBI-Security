@@ -12,21 +12,16 @@ To achieve this, [Shane Boulden](https://github.com/shaneboulden) and I have def
 
 This is the first pipeline that copies the Red Hat UBI into a local container registry:
  - check signature of the Red Hat UBI - cosign function
- - provide SBOM and upload SBOM (Software Bill of Material) to local container image registry for the Red Hat UBI - syft & cosign functions
  - build and upload UBI to private local Container Registry - git and buildah functions
- - sign UBI in the private local Container Registry - cosign function
  - check for vulnerabilities in the UBI in the local Container Registry - roxctl or native Quay view (in this demo I simply use the Quay UI).
     
 
 For uploading the UBI to private local Container Registry it uses the following Tasks:
  - git-clone (native Tekton task)
- - harden-ubi-build (a slightly modified version of buildah (native Tekton task) 
+ - harden-ubi-build (a slightly modified version of buildah (native Tekton task)) 
 
 
-For checking the signature it uses cosign (native Tekton)
-for providing the SBOM it could use syft however I slightly modified it (see syft folder) to combo syft and cosign together.
-
-#### pipeline steps
+#### Step 1 - check the Red Hat UBI signature
 
 ```
 crane digest example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6
@@ -44,8 +39,7 @@ The following checks were performed on each of these signatures:
 ```
 
 
-
-Check the digest of the latest UBI:
+#### Step 2 - Check the digest of the latest UBI:
 ```
 crane digest registry.redhat.io/ubi9/ubi:latest
 sha256:8d53b60617e53e4dbd6c0d485c569801f48dbeb40b48c8424a67e33a07320968
