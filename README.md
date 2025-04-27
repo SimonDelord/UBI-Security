@@ -22,27 +22,22 @@ The high level flow of the demo is shown in the figure below
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/images/UBI-demo-flow.png)
 
 
-Pushing a Red Hat UBI image to Quay, and using VEX to analyse the CVEs.
+The first part of the demo shows (this is called the first pipeline):
+ - how the [Red Hat Container Catalog](https://catalog.redhat.com/software/containers/) through the use of SigStore can show the provenance and associated vulnerabilities of the various UBI releases.
+ - how to provide more details on the UBI health using the VEX format. The analysis is done using the Clair Scanner tool within a local Quay Instance.
 
-Showing the vim-minimal package, and how it contributes over 108 CVES
+The second part of the demo shows (this is called the second pipeline):
+ - which vulnerabilities and packages could/should be removed as part of the previous steps.
+ - the build of the hardened UBI, the generation of an SBOM (Software Bill of Material) and the signing of the hardened image using cosign/tekton chains.
+ - all the above artefacts (signature, SBOM and hardened image) are stored on the local Quay instance
+ - all the records associated with the creation of those artefacts are stored into a local Rekor Instance (deployed locally on the OCP cluster under the RHTAS component).
 
-Hardening the UBI image via pipeline:
- - remove vim-minimal
- - update
- - sign + attestation (via Tekton Chains)
+The third part of the demo shows:
+ - how ACS can be used to block deployments of container images that do not have the proper signature (e.g provenance) in the environment. 
 
-Show that the new image has less CVEs
-
-So now we have:
-Quay using Red Hat VEX (and other sources) to evaluate CVEs inside the UBI
-A pipeline that:
-Pulls a UBI image
-Hardens it
-Signs it
-Pushes it to Quay, where CVEs are evaluated with VEX
-We also have provenance:
-Records stored in Rekor on how the hardened UBI was created - including build inputs / outputs
-Records stored in Rekor on the pipeline used to harden the UBI - which commit was used from the repo, etc
+This demo also covers:
+ - Records stored in Rekor on how the hardened UBI was created - including build inputs / outputs
+ - Records stored in Rekor on the pipeline used to harden the UBI - which commit was used from the repo, etc
 
 
 ## Platform components
@@ -51,6 +46,7 @@ Records stored in Rekor on the pipeline used to harden the UBI - which commit wa
  - Tekton
  - RHTAS (Red Hat Trusted Artifact Signer)
  - OpenShift Pipelines (e.g Tekton)
+ - ACS (Advanced Cluster for Security)
 
 Details on how to build the platform and setup the various functions are described under the [platform-build folder](https://github.com/SimonDelord/UBI-Security/tree/main/platform-build) . 
 
@@ -64,10 +60,8 @@ To achieve this, [Shane Boulden](https://github.com/shaneboulden) and I have def
 This is the first pipeline
  - Copy the Red Hat UBI into a local container registry:
     - check signature of the Red Hat UBI
-    - provide SBOM (Software Bill of Material) for the Red Hat UBI
     - upload UBI to private local Container Registry
-    - sign UBI in the private local Container Registry
-    - check for vulnerabilities in the UBI in the local Container Registry
+    - check for vulnerabilities in the UBI in the local Container Registry (this provides more information than the Red Hat container catalog). 
 
 The second pipeline is the following:
  - based on the vulnerabilities found in the UBI in the local container registry
@@ -79,19 +73,10 @@ The second pipeline is the following:
 
 Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/pipelines)
 
-Steps:
-Clone the code: https://github.com/shaneboulden/chains-pipeline
-Create the pipeline-run: oc create -f pipeline-run-chains.yaml
-Watch the build. Resulting image is signed with Tekton chains
-Next steps:
-Parameterise the source image (and update it in the dockerfile via sed
-Document the repo
 
 ## Structure of the Quay Repo
 
-There are 3 repos used in Quay as part of the demo:
- - ubi-base repo: this is simulating the Red Hat repo where the base ubi exists.
+There are 2 repos used in Quay as part of the demo:
  - ubi-base-customer repo: this is where the customer is uploading all of the base images (e.g it's a mirror copy of the ubi-base repo)
  - ubi-hardened repo: this is where the customer is uploading all of the hardened based images
 
-I need to create an image showing how images flow from ubi-base to ubi-base-customer to ubi-hardened
