@@ -21,7 +21,7 @@ For uploading the UBI to private local Container Registry it uses the following 
  - harden-ubi-build (a slightly modified version of buildah (native Tekton task)) 
 
 
-#### Step 1 - check the Red Hat UBI signature
+#### Example on how to check a container image signature using your own key
 
 ```
 crane digest example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6
@@ -39,7 +39,7 @@ The following checks were performed on each of these signatures:
 ```
 
 
-#### Step 2 - Check the digest of the latest UBI:
+#### Example on how to check the digest of the latest UBI from the red hat Container catalog:
 ```
 crane digest registry.redhat.io/ubi9/ubi:latest
 sha256:8d53b60617e53e4dbd6c0d485c569801f48dbeb40b48c8424a67e33a07320968
@@ -57,7 +57,6 @@ The following checks were performed on each of these signatures:
 ```
 
 ### Second pipeline
-
 
 The second pipeline is the following:
  - based on the vulnerabilities found in the UBI in the local container registry
