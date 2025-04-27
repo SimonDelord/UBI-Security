@@ -52,7 +52,7 @@ In the case where you want to check directly from the Red Hat website (registry.
 This updated task is called task-zero-fromredhat-website.yaml and the associated taskrun is task-zero-fromredhat-website-run.yaml.
 
 
-### First Task
+### First Task (no longer used as part of the demo)
 
 Defined in first-task.yaml and associated TaskRun in first-task-run.yaml.
 
@@ -66,7 +66,9 @@ This is a native task using the git-clone tekton Task (e.g existing task).
 An example of the TaskRun is presented in the second-task-run.yaml.
 
 OK there is something not working properly here. So instead, I have simply created a "one step  pipeline" and an associated pipeline-run. 
+
 These two artefacts will be used as part of the overall pipeline.
+
 They make use of the pipeline-pvc-2 and container-pvc-2 PVCs to store their outputs.
 
 
