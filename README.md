@@ -19,7 +19,7 @@ Another key point of this demo is that it is an hermetic build systems - Hermeti
 
 The high level flow of the demo is shown in the figure below
 
-![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/images/ubi-hardening-demo.png)
+![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/images/UBI-demo-flow.png)
 
 
 Pushing a Red Hat UBI image to Quay, and using VEX to analyse the CVEs.
