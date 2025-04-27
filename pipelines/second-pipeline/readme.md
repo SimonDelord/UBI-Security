@@ -1,5 +1,12 @@
 This is the repo for the second pipeline.
 
+It reuses most of the tasks of the first pipeline, the main change is the use of Syft (via the magic-image) to create the SBOM.
+
+The task for it is defined in [syft-task](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build/syft-build)
+
+
+### Old caveats - fixed in the latest pipeline
+
 There are a couple of things.
 
 First, I didn't manage to get the path to be read properly for the git-clone task so I simply created a brand new git repo to point to the git-clone task.
