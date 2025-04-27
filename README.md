@@ -73,6 +73,11 @@ The second pipeline is the following:
 
 Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/pipelines)
 
+## "Magic" container image
+
+Because the demo uses all of the sigstore functions (cosign, rekor-cli, crane, syft), I have created a container image (clearly not optimised but ok for a demo) that can be uploaded in advance to the local Quay repo to provide some of the Tekton Tasks used in the pipelines (typically the SBOM, the image signature checks, etc..).
+The ContainerFile for it is available under [magic-image](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build)
+
 
 ## Structure of the Quay Repo
 
