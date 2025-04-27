@@ -48,6 +48,7 @@ Please note the first task uses the "magic image" that has been build (e.g rekor
 #### Updated Task zero
 
 In the case where you want to check directly from the Red Hat website (registry.redhat.io/ubi9/ubi:latest), you can run a different task that uses cosign directly.
+
 This updated task is called task-zero-fromredhat-website.yaml and the associated taskrun is task-zero-fromredhat-website-run.yaml.
 
 
