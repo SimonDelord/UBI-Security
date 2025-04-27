@@ -1,9 +1,10 @@
 This is the repo that shows how to build a jumphost with all the relevant CLIs for the demo.
 
 You need:
- - cosign
- - rekor
- - crane
+ - cosign (for signing and verifying container images)
+ - rekor-cli (for interacting with transparency logs - e.g the local rekor environment) 
+ - crane (for retrieving container images manifests and digests)
+ - syft (for creating SBOM)
 
 Both crane and cosign get installed under Go.
 
@@ -41,3 +42,9 @@ crane version
 go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
 ```
 
+## Install syft
+
+```
+curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+syft version
+```
