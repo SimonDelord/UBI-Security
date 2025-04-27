@@ -16,8 +16,11 @@ The various tasks are read sequentially.
 Defined in zero-task.yaml and associated TaskRun in zero-task-run.yaml
 
 There are a couple of things that need to be done first.
+
 To check that the specific image you are checking is signed, you need to have a public-key (e.g of the instance that signed it) available.
+
 You can then create a secret
+
 ```
 oc create secret generic cosign-public-key --from-file=cosign.pub
 ```
