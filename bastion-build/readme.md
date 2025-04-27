@@ -6,7 +6,9 @@ You need:
  - crane (for retrieving container images manifests and digests)
  - syft (for creating SBOM)
 
-Both crane and cosign get installed under Go.
+Both crane, cosign and rekor-cli get installed under Go.
+
+Syft is installed running a bash script.
 
 
 ## Install Go ##
