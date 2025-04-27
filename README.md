@@ -9,8 +9,9 @@ The demo covers:
 - Building pipelines to harden and sign the UBI, using cosign and Tekton Chains
 - Using Red Hat Advanced Cluster Security for Kubernetes (RHACS) admission control to block base images that haven't been through internal hardening pipelines
 
-Demo showing how to secure UBI and report on it using CSAF/VEX format.
-Hermetic build systems - Hermetic meaning - contained, and everything is performed on OCP (harden, sign, build apps, etc)
+This demo also highlights how the CSAF/VEX format is used to secure the UBI and report on it.
+
+Another key point of this demo is that it is an hermetic build systems - Hermetic meaning - contained with everything performed in OCP (harden, sign, build apps, etc).
 
 
 
