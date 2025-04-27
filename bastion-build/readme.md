@@ -1,4 +1,6 @@
-This is the repo that shows how to build a jumphost with all the relevant CLIs for the demo.
+This is the repo that shows how to:
+ - build a jumphost with all the relevant CLIs for the demo.
+ - build the equivalent function as a container image.
 
 You need:
  - cosign (for signing and verifying container images)
@@ -50,3 +52,5 @@ go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
 curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 syft version
 ```
+
+The associated container file is available [container-file](https://github.com/SimonDelord/UBI-Security/blob/main/bastion-build/Dockerfile)
