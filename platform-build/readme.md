@@ -7,6 +7,7 @@ There are multiple components that need to be installed on OpenShift for the pla
  - third you need to deploy Quay
  - fourth you need to deploy RHTAS (Red Hat Trusted Artifact Signer)
  - fifth you need to deploy OpenShift Pipelines (e.g Tekton)
+ - sixth you need to deploy ACS (not detailed here) 
 
 ### Install ODF as the underlying storage capability
 
