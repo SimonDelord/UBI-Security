@@ -1,6 +1,7 @@
 This is the repo that shows how to:
  - build a jumphost with all the relevant CLIs for the demo.
  - build the equivalent function as a container image.
+ - the syft tasks in Tekton (as unfortunately the base "syft tekton task" seems to be broken).
 
 You need:
  - cosign (for signing and verifying container images)
@@ -54,3 +55,5 @@ syft version
 ```
 
 The associated container file is available [container-file](https://github.com/SimonDelord/UBI-Security/blob/main/bastion-build/Dockerfile)
+
+The various tasks used for syft as part of the overall pipelines are available [here](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build/syft-build)
