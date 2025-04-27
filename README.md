@@ -1,5 +1,6 @@
 # UBI-Security
 This is the demo that [Shane Boulden](https://github.com/shaneboulden) and myself have developed to cover how organisations can better manage the UBI, and create internal workflows to build 'golden' base images.
+
 A recorded video of this is available [here](https://videos.learning.redhat.com/media/Platform%20engineering%20and%20building%20UBI-based%20golden%20images/1_bio6rg2o) (20 minutes)
 
 The demo covers:
