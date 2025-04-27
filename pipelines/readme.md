@@ -8,13 +8,6 @@ Once the platform and its components have been setup, the main part of the demo 
 To achieve this, [Shane Boulden](https://github.com/shaneboulden) and I have defined a workflow that does the following: 
 
 
-## Benefits of using Tekton
-
-There are multiple benefits to using Tekton as part of the build:
- - reuse of multiple Taks that have been pre-built
- - TektonChains which does the automatic signing of each of the tasks and upload to the relevant Rekor Server for it.
-
-
 ### First pipeline
 
 This is the first pipeline that copies the Red Hat UBI into a local container registry:
@@ -82,4 +75,9 @@ The second pipeline is the following:
 
 Details of both pipelines are available in the [pipelines folder](https://github.com/SimonDelord/UBI-Security/tree/main/pipelines)
 
+## Benefits of using Tekton
+
+There are multiple benefits to using Tekton as part of the build:
+ - reuse of multiple Tasks that have been pre-built (git, buildah, etc).
+ - TektonChains which does the automatic signing of each of the tasks and upload to the relevant Rekor Server for it.
 
