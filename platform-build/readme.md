@@ -129,6 +129,9 @@ Select in Operator Hub the Red Hat Trusted Artifact Signer and do the default in
 ![Browser](https://github.com/SimonDelord/UBI-Security/blob/main/platform-build/images/rhtas-1.png)
 
 Then once the operator is installed (don't worry about the fulcio server crashing if you don't configure the OIDC function, it's not needed for this demo). 
+
+Please note you need to install a database for the backend. You can follow those [instructions](https://docs.redhat.com/en/documentation/red_hat_trusted_artifact_signer/1/html/deployment_guide/configure-an-alternative-database-for-trusted-artifact-signer#configuring-a-database-in-openshift-for-trusted-artifact-signer_deploy)
+
 ## deploy OpenShift pipelines
 
 This is pretty straight forward, just go to the operator hub and deploy the OpenShift Pipelines Operator using the default.
