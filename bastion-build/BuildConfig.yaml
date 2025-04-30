@@ -1,0 +1,75 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: magic-image-build
+  namespace: ubi-hardening
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: example-registry-quay-quay.apps.ubi-demo.sandbox2820.opentlc.com/quayuser1/magic-image
+    pushSecret:
+      name: ubi-demo-token-pull-secret
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: 'registry.access.redhat.com/ubi9/ubi:latest'
+  postCommit: {}
+  source:
+    type: Dockerfile
+    dockerfile: |-
+      FROM registry.access.redhat.com/ubi9/ubi:latest
+
+      RUN \
+        dnf install git unzip wget -y \
+        && dnf clean all
+
+      ## Install Go
+
+      RUN wget https://go.dev/dl/go1.24.1.linux-amd64.tar.gz
+      RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.1.linux-amd64.tar.gz
+      ## RUN export PATH=$PATH:/usr/local/go/bin
+      ENV PATH="$PATH:/usr/local/go/bin"
+      RUN go version
+
+      ## Install cosign
+
+      RUN go install github.com/sigstore/cosign/v2/cmd/cosign@latest
+      ##RUN cosign version
+
+      ## Install Crane
+
+      RUN go install github.com/google/go-containerregistry/cmd/crane@latest
+      ##RUN crane version
+
+      ## Install Rekor-cli
+
+      RUN go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
+      ##RUN rekor-cli version
+
+      ## Install syft
+
+      ##echo "echo 'hello world' | grep ell" >> /entrypoint.sh &&\
+      ##RUN \
+       ##   echo "#!/bin/ash" > /entrypoint.sh &&\
+        ##  echo "echo 'hello world' | grep ell" >> /entrypoint.sh &&\
+         ## chmod 755 /entrypoint.sh
+
+
+
+      RUN \
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
+
+      ENV HOME /root
+
+      WORKDIR /root
+
+      CMD tail -f /dev/null
+  runPolicy: Serial
