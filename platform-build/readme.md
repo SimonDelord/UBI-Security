@@ -132,6 +132,10 @@ Then once the operator is installed (don't worry about the fulcio server crashin
 
 Please note you need to install a database for the backend. You can follow those [instructions](https://docs.redhat.com/en/documentation/red_hat_trusted_artifact_signer/1/html/deployment_guide/configure-an-alternative-database-for-trusted-artifact-signer#configuring-a-database-in-openshift-for-trusted-artifact-signer_deploy)
 
+Make sure you keep the default values provided in the deployment template for the DB (e.g DBNAme as trillian).
+
+You can then select on the RHTAS operator the Securesign instance and use the defaults. 
+
 ## deploy OpenShift pipelines
 
 This is pretty straight forward, just go to the operator hub and deploy the OpenShift Pipelines Operator using the default.
