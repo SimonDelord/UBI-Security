@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1
+kind: TaskRun
+metadata:
+  generateName: generate-sbom-and-upload-to-repo-
+  namespace: openshift-pipelines
+  labels:
+    app.kubernetes.io/managed-by: tekton-pipelines
+    app.kubernetes.io/version: '0.1'
+    tekton.dev/task: generate-sbom-and-upload-to-repo
+spec:
+  params:
+    - name: sourceImage
+      value: 'example-registry-quay-quay.apps.ubi-demo.sandbox2820.opentlc.com/quayuser1/ubi-hardened-demo:v.9.6'
+    - name: destination
+      value: 'example-registry-quay-quay.apps.ubi-demo.sandbox2820.opentlc.com/quayuser1/ubi-hardened-demo:v.9.6.sbom'
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: generate-sbom-and-upload-to-repo
+  timeout: 1h0m0s
