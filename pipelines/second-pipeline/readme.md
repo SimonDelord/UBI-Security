@@ -35,4 +35,9 @@ oc create secret generic cosign-private-key --from-file=cosign.key
 
 You can then run the following command (e.g as part of the tekton Task)
 
+```
 cosign verify --key k8s://openshift-pipelines/cosign-public-key example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/demo:v.9.6@sha256:b8e657c0628a947e8c57616becbdb78f3c3ccbbc4dae27272ffbbd243a04735c --insecure-ignore-tlog=true
+```
+
+## the syft task
+it's lovely to not have certificates in the environment, so I've needed to modify the syft task to include the TLS-SKIP-INSECURE variable, please see the bastion-build/syft-build repo.
