@@ -96,4 +96,12 @@ You also need to give enough permissions on this SA to do what it needs to do.
 oc adm policy add-role-to-user cluster-admin -z pipeline
 ```
 
+## Comments on Certificates
+
+If you're using a ROSA environment all CAs are configured properly.
+
+If you're using your own environmnet, you may have to "tweak" some of the TLS functions to let the pipeline run properly.
+
+For example as part of the 3rd step on the first pipeline, harden-ubi-build Task, you can enable or disable the TLS verification.
+
 
