@@ -74,3 +74,26 @@ There are multiple benefits to using Tekton as part of the build:
  - reuse of multiple Tasks that have been pre-built (git, buildah, etc).
  - TektonChains which does the automatic signing of each of the tasks and upload to the relevant Rekor Server for it.
 
+## Service account for the pipeline
+
+Please remember to use a service account to add to the pipeline (in this example the SA is called pipeline) and to put it in the same
+namespace as where the pipeline is running (in my case openshift-pipelines).
+
+This service account must reference the token you have created in the local Quay instance. 
+
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pipeline
+secrets:
+- name: ubi-demo-token-pull-secret
+```
+
+You also need to give enough permissions on this SA to do what it needs to do.
+
+```
+oc adm policy add-role-to-user cluster-admin -z pipeline
+```
+
+
