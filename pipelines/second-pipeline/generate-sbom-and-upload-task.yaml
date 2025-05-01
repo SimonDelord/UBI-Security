@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: generate-sbom-and-upload-to-repo
+spec:
+  params:
+    - name: sourceImage
+      description: the container registry for the container image for which the sbom is generated
+      type: string
+    - name: destination
+      description: the registry where the sbom is going to be uploaded
+      type: string
+  steps:
+    - name: use-syft-for-sbom
+      image: example-registry-quay-quay.apps.rosa-pwfrp.lnqt.p1.openshiftapps.com/quayuser1/magic-image
+      env:
+      - name: PARAM_SOURCE_IMAGE
+        value: $(params.sourceImage)
+      - name: PARAM_DESTINATION
+        value: $(params.destination)
+      script: |
+        curl https://raw.githubusercontent.com/SimonDelord/UBI-Security/refs/heads/main/bastion-build/syft-build/.syft.yaml >> .syft.yaml
+        syft "$(PARAM_SOURCE_IMAGE)" >> simon.spdx.sbom; ./go/bin/cosign upload blob -f simon.spdx.sbom "$(PARAM_DESTINATION)" --allow-insecure-registry=true --registry-username=quayuser1 --registry-password=1800redhat
