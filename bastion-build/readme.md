@@ -59,3 +59,5 @@ The associated container file is available [container-file](https://github.com/S
 I have built the image using a BuildConfig template available in this repo [build-config](https://github.com/SimonDelord/UBI-Security/blob/main/bastion-build/BuildConfig.yaml)
 
 The various tasks used for syft as part of the overall pipelines are available [here](https://github.com/SimonDelord/UBI-Security/tree/main/bastion-build/syft-build)
+
+There is also a publically available image under quay.io/rhn_support_sdelord/magic-image:latest
