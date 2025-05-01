@@ -1,0 +1,2 @@
+registry:
+  insecure-skip-tls-verify: true
