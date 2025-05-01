@@ -30,7 +30,7 @@ You can then create two secrets
 
 ```
 oc create secret generic cosign-public-key --from-file=cosign.pub
-oc create secret generic cosign-private-key --from-file=cosign.priv
+oc create secret generic cosign-private-key --from-file=cosign.key
 ```
 
 You can then run the following command (e.g as part of the tekton Task)
